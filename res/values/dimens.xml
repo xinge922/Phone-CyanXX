@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensions for OTA Call Card -->
+    <dimen name="otabase_layout_marginTop">30dip</dimen>
+    <dimen name="otabase_minHeight">270dip</dimen>
+    <dimen name="otaactivate_layout_marginTop">10dip</dimen>
+    <dimen name="otalistenprogress_layout_marginTop">5dip</dimen>
+    <dimen name="otasuccessfail_layout_marginTop">10dip</dimen>
+    <dimen name="call_banner_height">80dp</dimen>
+    <dimen name="upper_buttons_top_margin">280dp</dimen>
+    <dimen name="in_call_button_cluster_height">110dp</dimen>
+    <dimen name="in_call_incoming_call_widget_height">260dp</dimen>
+    <dimen name="call_banner_side_padding">24dp</dimen>
+    <dimen name="call_banner_top_bottom_padding">16dp</dimen>
+    <dimen name="contact_photo_inset_width">180dp</dimen>
+    <dimen name="contact_photo_inset_height">180dp</dimen>
+    <dimen name="contact_photo_inset_left_margin">0dp</dimen>
+    <dimen name="call_state_label_right_padding">10dp</dimen>
+    <dimen name="call_state_label_top_bottom_padding">5dp</dimen>
+    <dimen name="as_jb_size_height">60dp</dimen>
+    <dimen name="as_jb_icon_size_height">60dp</dimen>
+    <dimen name="as_jb_icon_size_width">54dp</dimen>
+    <dimen name="call_banner_name_number_right_padding">50sp</dimen>
+</resources>

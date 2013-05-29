@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- XML resource file for the *children* of a CallCard used in the Phone app.
+     The CallCard itself is a subclass of FrameLayout, and its (single)
+     child is the LinearLayout found here.  (In the CallCard constructor,
+     we inflate this file and add it as a child.)
+     TODO: consider just <include>ing this directly from incall_screen.xml? -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout android:id="@+id/call_info_container"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+         >
+
+<RelativeLayout android:id="@+id/call_info_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <!-- Photo, or else a generic placeholder image. -->
+        <!-- Contact photos are generally 96x96 (but may be smaller.)
+             The layout size of this ImageView is larger than that, though,
+             to account for the incall_photo_border background, which
+             adds a white border around the image (and a shadow around
+             the white border.) -->
+        <!-- TODO change the layout size: by cytown -->
+        <com.android.phone.InCallContactPhoto android:id="@+id/photo"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_alignParentTop="true"
+                   android:scaleType="centerCrop"
+                   android:gravity="top|center_horizontal"
+                   android:contentDescription="@string/contactPhoto"
+                   />
+
+         <!-- Video ringtone. -->
+         <VideoView android:id="@+id/video"
+                   android:visibility="gone"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_alignParentTop="true" />
+
+    <View android:id="@+id/dim_effect_for_primary_photo"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="@color/on_hold_dim_effect"
+         android:visibility="gone" />
+
+    <!-- Photo, with elapsed time widget off to the side. -->
+    <RelativeLayout android:id="@+id/call_banner_1"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/call_banner_height"
+        android:paddingRight="@dimen/call_banner_side_padding"
+        android:paddingTop="@dimen/call_banner_top_bottom_padding"
+        android:paddingBottom="@dimen/call_banner_top_bottom_padding"
+        android:background="#A0000000"
+        >
+
+    <!-- Name (or the phone number, if we don't have a name to display). -->
+    <TextView android:id="@+id/name"
+              android:paddingRight="@dimen/call_banner_name_number_right_padding"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textColor="@color/incall_call_banner_text_color"
+              android:singleLine="true"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentLeft="true"
+              android:layout_marginLeft="6dp"
+              />
+
+    <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
+    <LinearLayout android:id="@+id/labelAndNumber"
+                  android:orientation="horizontal"
+                  android:layout_below="@id/name"
+                  android:paddingRight="@dimen/call_banner_name_number_right_padding"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="6dp"
+                  >
+
+       <LinearLayout android:orientation="vertical"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" >
+
+        <TextView android:id="@+id/phoneNumber"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="@color/incall_call_banner_text_color"
+                  android:singleLine="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  />
+        <!-- City, used in Chinese version, originally from Geesun -->
+        <TextView android:id="@+id/city"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textSize="16sp"
+                  android:textColor="#6DAE27"
+                  android:singleLine="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="6dip"
+                  android:layout_alignLeft="@id/name"
+                  />
+        <!-- Organization, if we set it shown. -->
+        <TextView android:id="@+id/organization"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="@color/incall_call_banner_text_color"
+                  android:singleLine="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  />
+        </LinearLayout>
+        <TextView android:id="@+id/label"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="@color/incall_call_banner_text_color"
+                  android:singleLine="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  />
+    </LinearLayout>
+
+        <!-- Elapsed time indication for a call in progress. -->
+        <TextView android:id="@+id/elapsedTime"
+                  android:layout_centerVertical="true"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:textColor="#6DAE27"
+                  android:singleLine="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  />
+
+        <!-- The big "Manage conference" button that we show in place of
+             the contact photo during a conference call (but only on
+             devices where the in-call touch UI is enabled.)  The photo is
+             invisible if this button is visible, and vice-versa. -->
+        <Button android:id="@+id/manageConferencePhotoButton"
+                android:layout_below="@id/labelAndNumber"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/onscreenManageConferenceText"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary"
+            />
+
+    <!-- Call type indication: a special label and/or branding
+         for certain kinds of calls -->
+    <TextView android:id="@+id/callTypeLabel"
+              android:layout_below="@id/labelAndNumber"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:textColor="@color/incall_call_banner_text_color"
+              android:maxLines="1"
+              android:ellipsize="end"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              />
+
+    <!-- Social status -->
+    <TextView android:id="@+id/socialStatus"
+              android:layout_below="@id/callTypeLabel"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:textColor="@color/incall_call_banner_text_color"
+              android:maxLines="2"
+              android:ellipsize="end"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              />
+    </RelativeLayout>
+
+        <ImageView android:id="@+id/insetPhoto"
+            android:layout_below="@id/call_banner_1"
+            android:layout_width="@dimen/contact_photo_inset_width"
+            android:layout_height="@dimen/contact_photo_inset_height"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="@dimen/contact_photo_inset_left_margin"
+            />
+
+        <TextView android:id="@+id/callStateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/call_banner_1"
+            android:gravity="right"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="@dimen/call_banner_side_padding"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/incall_call_banner_text_color"
+            android:background="@color/incall_call_state_label_background"
+            android:visibility="gone"
+            />
+</RelativeLayout>
+
+<RelativeLayout android:id="@+id/call_info_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <!-- Scaled-down photo, or else a generic placeholder image. -->
+        <com.android.phone.InCallContactPhoto android:id="@+id/secondaryCallPhoto"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:gravity="top|center_horizontal"
+            android:contentDescription="@string/onHold"
+            />
+
+   <View android:id="@+id/dim_effect_for_secondary_photo"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="@color/on_hold_dim_effect"
+         android:visibility="gone" />
+
+    <RelativeLayout android:id="@+id/call_banner_2"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/call_banner_height"
+        android:paddingLeft="@dimen/call_banner_side_padding"
+        android:paddingRight="@dimen/call_banner_side_padding"
+        android:paddingTop="@dimen/call_banner_top_bottom_padding"
+        android:paddingBottom="@dimen/call_banner_top_bottom_padding"
+        android:background="#A0000000"
+        >
+
+    <!-- Info about the "secondary" call, displayed at the upper right of
+         the screen.  (If you're on a call with both lines in use, this
+         area displays the status and caller-id info of the call on hold.)
+
+         This block of info needs to be Z-ordered underneath the
+         primaryCallInfo block, so it's the first child listed here. -->
+
+        <TextView android:id="@+id/secondaryCallName"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textColor="@color/incall_call_banner_text_color"
+              android:singleLine="true"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentLeft="true"
+              />
+
+        <TextView android:id="@+id/secondaryCallStatus"
+              android:text="@string/onHold"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:textColor="@color/incall_call_banner_text_color"
+              android:singleLine="true"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentRight="true"
+              />
+    </RelativeLayout>
+</RelativeLayout>
+  </LinearLayout>    <!-- End of (1) The main call card -->
+
+    <!-- The hint about the Menu button, below all the call info.
+         This is only ever shown on devices that actually have a
+         menu while in-call, i.e. it's never shown on devices where the
+         InCallTouchUi is enabled (see InCallScreen.updateMenuButtonHint().) -->
+    <TextView android:id="@+id/menuButtonHint"
+              android:text="@string/menuButtonHint"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textSize="18sp"
+              android:textColor="?android:attr/textColorSecondary"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/call_info_1"
+              android:layout_marginTop="22dip"
+              android:layout_centerHorizontal="true"
+              android:visibility="gone"
+              />
+
+</RelativeLayout>
